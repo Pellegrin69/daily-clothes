@@ -1,4 +1,4 @@
-import {createContext, useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 import {createAUsers, deleteAUsers, getAllUsers, updateAUsers} from "../api/user";
 import {Link} from "react-router-dom";
 
@@ -11,6 +11,8 @@ export const UserList = () => {
     createAUsers({
       firstname: "John",
       lastname: "Doe",
+      email: "test@test.com",
+      password: "yooooo",
       age: 30
     }).then(() => {
       getUsers();
@@ -22,6 +24,8 @@ export const UserList = () => {
       id: user.id,
       firstname: "Toto",
       lastname: "Bourdon",
+      email: "test@test.fr",
+      password: "testset",
       age: 53
     })
       .then(() => {
