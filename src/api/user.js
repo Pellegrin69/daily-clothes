@@ -11,7 +11,7 @@ export const getAllUsers = () => {
     .catch((error) => console.log(error))
 }
 
-export const getOneUsers = (userId) => {
+export const getOneUser = (userId) => {
   return fetch(`${url}/${userId}`, {method: 'GET', headers})
     .then((response) => response.json())
 }

@@ -1,13 +1,13 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getOneUsers} from "../api/user";
+import {getOneUser} from "../api/user";
 
 export const UserDetail = () => {
   const {userId} = useParams();
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    getOneUsers(userId)
+    getOneUser(userId)
       .then((data) => setUser(data))
   }, [])
 
