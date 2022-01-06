@@ -7,6 +7,7 @@ import SignUp from "./SignUp";
 import Profile from "../pages/Profile";
 import About from "../pages/About";
 import NotFound from "../pages/NotFound";
+import Dashboard from "../pages/Dashboard";
 
 const Routing = () => {
   return (
@@ -20,6 +21,7 @@ const Routing = () => {
         <Route path="/profile/:userId" element={<Profile/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="*" element={<NotFound/>}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
       </Routes>
     </>
   );
