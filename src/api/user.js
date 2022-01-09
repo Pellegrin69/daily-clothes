@@ -16,7 +16,7 @@ export const getOneUser = (userId) => {
     .then((response) => response.json())
 }
 
-export const createAUsers = (newUser) => {
+export const createAUser = (newUser) => {
   return fetch(url, {method: 'POST', headers, body: JSON.stringify(newUser)})
 }
 

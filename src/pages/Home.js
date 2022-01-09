@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {addAClothe, getAllClothes, updateAClothe, deleteAClothe} from "../api/clothes";
 
 const Home = () => {

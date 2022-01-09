@@ -1,5 +1,5 @@
 import { useEffect, useState} from "react";
-import {createAUsers, deleteAUsers, getAllUsers, updateAUsers} from "../api/user";
+import {createAUser, deleteAUsers, getAllUsers, updateAUsers} from "../api/user";
 import {Link} from "react-router-dom";
 
 export const UserList = () => {
@@ -8,7 +8,7 @@ export const UserList = () => {
   const getUsers = () => getAllUsers().then((data) => setUsers(data))
 
   const clickHandler = () => {
-    createAUsers({
+    createAUser({
       firstname: "John",
       lastname: "Doe",
       email: "test@test.com",
