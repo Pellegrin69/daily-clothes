@@ -1,9 +1,12 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const SignIn = () => {
   return (
     <div>
       <h2>Sign In</h2>
+      <Link to="/signup">Sign up</Link>
+
       <div className="row justify-content-center">
         <div className="col-4">
 
