@@ -1,34 +1,21 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
+import {sign} from "../api/user"
 
 const SignIn = () => {
 
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
+
+   let item = {email, password}
    const navigate = useNavigate()
-
-   async function login() {
-      let item = {email, password}
-
-      let result = await fetch("http://localhost:8000/users",
-         {
-            method: 'POST',
-            headers: {
-               "Content-Type": 'application/json',
-               "Accept": 'application/json'
-            },
-            body: JSON.stringify(item)
-         })
-      result = await result.json()
-      localStorage.setItem("user-info", JSON.stringify(result))
-      navigate("/")
+   const submit = () => {
+      sign(item, navigate, "login")
    }
-
    return (
-      <div>
-         <h2>Sign In</h2>
-         <Link to="/signup">Sign up</Link>
+      <>
+         <h2 className="text-center text-primary">Sign In</h2>
 
          <div className="row justify-content-center">
             <div className="col-4">
@@ -52,12 +39,15 @@ const SignIn = () => {
                </div>
 
                <div className="text-end">
-                  <button className="btn btn-primary" onClick={login}>Submit</button>
+                  <button className="btn btn-primary" onClick={submit}>Submit</button>
                </div>
 
             </div>
          </div>
-      </div>
+         <p className="text-center text-primary mt-3">
+            Don't have an account yet ? <Link to="/signup">Sign up</Link>.
+         </p>
+      </>
    );
 };
 

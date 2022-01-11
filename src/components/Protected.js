@@ -5,17 +5,14 @@ const Protected = (props) => {
 
    let navigate = useNavigate();
    useEffect(() => {
-      if (!localStorage.getItem("user-info")) {
+      if (!localStorage.getItem("token") && !localStorage.getItem("user")) {
          navigate("/signin")
       }
-   }, [])
+   }, [navigate])
 
    let Cmp = props.Cmp
-   return (
-      <>
-         <Cmp/>
-      </>
-   );
+
+   return <Cmp/>;
 };
 
 export default Protected;
