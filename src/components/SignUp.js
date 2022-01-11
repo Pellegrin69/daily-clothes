@@ -9,7 +9,7 @@ const SignUp = () => {
    const [email, setEmail] = useState("");
    const navigate = useNavigate()
 
-   async function submitHandler() {
+   async function register() {
       let item = {username, password, email}
 
       let result = await fetch("http://localhost:8000/users",
@@ -22,7 +22,6 @@ const SignUp = () => {
             body: JSON.stringify(item)
          })
       result = await result.json()
-      console.warn("result", result)
       localStorage.setItem("user-info", JSON.stringify(result))
       navigate("/")
    }
@@ -63,10 +62,7 @@ const SignUp = () => {
                </div>
 
                <div className="text-end">
-                  <div className="btn-group">
-                     <button className="btn btn-secondary" value="cancel">Cancel</button>
-                     <button className="btn btn-primary" onClick={submitHandler}>Register</button>
-                  </div>
+                  <button className="btn btn-primary" onClick={register}>Register</button>
                </div>
 
             </div>
