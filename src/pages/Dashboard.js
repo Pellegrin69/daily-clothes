@@ -1,3 +1,4 @@
+/*
 import React from "react";
 import '../css/bootstrap.min.css';
 import '../css/style.css';
@@ -118,4 +119,4 @@ const Dashboard = () => {
             );
             };
 
-export default Dashboard;
+export default Dashboard;*/
