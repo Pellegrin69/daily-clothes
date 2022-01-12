@@ -1,9 +1,18 @@
-import {resolvePath} from "react-router";
+export const getUser = () => {
+   const userStr = localStorage.getItem("user");
+   if (userStr) return JSON.parse(userStr)
+   else return null
+}
+
+export const getToken = () => {
+   return localStorage.getItem("token") || null;
+}
 
 const url = 'http://localhost:8000/users';
 const headers = {
    'Content-Type': 'application/json',
-   'Accept': 'application/json'
+   'Accept': 'application/json',
+   'Authorization': `Bearer ${getToken()}`
 };
 
 export async function sign(item, navigate, type) {
@@ -11,7 +20,10 @@ export async function sign(item, navigate, type) {
    const response = await fetch(`http://localhost:8000/${type}`,
       {
          method: 'POST',
-         headers: headers,
+         headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+         },
          body: JSON.stringify(item)
       })
    const result = await response.json()
@@ -20,7 +32,7 @@ export async function sign(item, navigate, type) {
       localStorage.setItem("token", JSON.stringify(result.accessToken))
       navigate("/")
    } else {
-      const error = `Error ${response.status} : ${response.statusText} - ${result}`
+      const error = `Error ${response.status} : ${result}`
       console.log(error)
       return Promise.reject(error)
    }
@@ -32,19 +44,8 @@ export const getAllUsers = () => {
 }
 
 export const getOneUser = (userId) => {
-   return fetch(`${url}/${userId}`, {
-      method: 'GET',
-      headers: {
-         'Content-Type': 'application/json',
-         'Accept': 'application/json',
-         'Authorization': `Bearer ${getToken()}`
-      }
-   })
+   return fetch(`${url}/${userId}`, {method: 'GET', headers})
       .then((response) => response.json())
-}
-
-export const createAUser = (newUser) => {
-   return fetch(url, {method: 'POST', headers, body: JSON.stringify(newUser)})
 }
 
 export const updateAUsers = (updatedUser) => {
@@ -55,22 +56,5 @@ export const deleteAUsers = (deletedUserID) => {
    return fetch(`${url}/${deletedUserID}`, {method: 'DELETE', headers})
 }
 
-export const getUser = () => {
-   const userStr = localStorage.getItem("user");
-   if (userStr) return JSON.parse(userStr)
-   else return null
-}
 
-export const getToken = () => {
-   return localStorage.getItem("token") || null;
-}
 
-export const setUserSession = (user, token) => {
-   localStorage.setItem("user", JSON.stringify(user));
-   localStorage.setItem("token", token);
-}
-
-export const removeUserSession = (navigate) => {
-   localStorage.removeItem("user");
-   localStorage.removeItem("token");
-}
