@@ -48,14 +48,14 @@ const Home = () => {
     <ul>
       {
         clothes.map((clothe) =>
-          <li key={clothe.id}>
-            {/*
+            <li key={clothe.id}>
+              {/*
             <Link to={`user/${clothe.id}`}>{clothe.firstname} {clothe.lastname}</Link>
             */}
-            <p>{clothe.brand} {clothe.color}</p>
-            <button type="button" onClick={() => updateClickHandler(clothe)}>Update</button>
-            <button type="button" onClick={() => deleteClickHandler(clothe)}>Delete</button>
-          </li>)
+              <p>{clothe.brand} {clothe.color}</p>
+              <button type="button" onClick={() => updateClickHandler(clothe)}>Update</button>
+              <button type="button" onClick={() => deleteClickHandler(clothe)}>Delete</button>
+            </li>)
       }
     </ul>
   </>;

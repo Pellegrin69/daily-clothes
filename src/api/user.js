@@ -27,3 +27,9 @@ export const updateAUsers = (updatedUser) => {
 export const deleteAUsers = (deletedUserID) => {
   return fetch(`${url}/${deletedUserID}`, {method: 'DELETE', headers})
 }
+
+export const removeUserSession = (navigate) => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    navigate("/signin")
+}
