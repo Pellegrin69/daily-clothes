@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {addAClothe, getAllClothes, updateAClothe, deleteAClothe} from "../api/clothes";
+import {Link} from "react-router-dom";
 
 const Home = () => {
 
@@ -59,5 +60,6 @@ const Home = () => {
     </ul>
   </>;
 }
+
 
 export default Home;
