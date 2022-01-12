@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
-import {getOneUser} from "../api/user";
+import {getOneUser, getUser} from "../api/user";
 import {removeUserSession} from  "../api/user.js";
+import {deleteAUsers} from  "../api/user.js";
 import {useNavigate} from "react-router";
 
 const Profile = () => {
   const {userId} = useParams();
-  const [user, setUser] = useState(null)
+  const [setUser] = useState(null)
   const navigate = useNavigate();
+  const user = getUser();
 
   useEffect(() => {
     getOneUser(userId)
@@ -15,6 +17,9 @@ const Profile = () => {
   }, [])
   const logout = () => {
     removeUserSession(navigate)
+  }
+  const deleteuser = () => {
+    deleteAUsers(user.id)
   }
   return <>
     <h2>Profile</h2>
@@ -38,6 +43,7 @@ const Profile = () => {
           </div>
         </div>
           <button onClick={logout} className="btn btn-danger">Log out</button>
+          <button onClick={deleteuser} className="btn btn-danger">Delete the account</button>
       </>
     }
   </>
