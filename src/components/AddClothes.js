@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import {useEffect, useState} from "react";
-import {addAClothe, deleteAClothe, getAllClothes, updateAClothe} from "../../api/clothes";
+import {addAClothe, deleteAClothe, getAllClothes, updateAClothe} from "../api/clothes";
 import "./AddClothes.css"
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
