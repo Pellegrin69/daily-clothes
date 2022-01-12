@@ -1,9 +1,5 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import {useEffect, useState} from "react";
 import {addAClothe, deleteAClothe, getAllClothes, updateAClothe} from "../../api/clothes";
 import "./AddClothes.css"
@@ -50,7 +46,7 @@ export const AddClothes = () => {
     setOpenEditClothe(false)
   };
 
-  const [clothes, setClothes] = useState(["no clothes in database..."]);
+  const [clothes, setClothes] = useState(["no clothes in database, add "]);
   const getClothes = () => getAllClothes().then((data) => setClothes(data))
 
   const clickHandler = () => {
@@ -218,28 +214,20 @@ export const AddClothes = () => {
           {
             clothes.map((clothe, index) =>
               <div key={index} className="col-3 mb-3">
-                <Card sx={{minWidth: 275}} className="card">
-                  <CardContent>
-                    <Typography variant="h5" component="div">
-                      brand : {clothe.brand}
-                    </Typography>
-                    <Typography variant="body2">
-                      Size : {clothe.size}
-                    </Typography>
-                    <Typography variant="body2">
-                      Type : {clothe.type}
-                    </Typography>
-                    <Typography variant="body2">
-                      Color : {clothe.color}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" variant="contained" color="error"
-                            onClick={() => deleteClickHandler(clothe)}>Delete</Button>
-                    <Button size="small" variant="contained" color="secondary"
-                            onClick={() => updateClickHandler(clothe)}>Edit</Button>
-                  </CardActions>
-                </Card>
+
+                <div className="card">
+                  <div className="card-body">
+                    <h5 className="card-title">{clothe.brand}</h5>
+                    <p className="card-text">Size : {clothe.size}</p>
+                    <p className="card-text">Type : {clothe.type}</p>
+                    <p className="card-text">Color : {clothe.color}</p>
+                    <div className="btn btn-group">
+                      <button onClick={() => deleteClickHandler(clothe)} className="btn btn-danger">Delete</button>
+                      <button onClick={() => updateClickHandler(clothe)}  className="btn btn-primary">Edit</button>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             )}
         </div>
