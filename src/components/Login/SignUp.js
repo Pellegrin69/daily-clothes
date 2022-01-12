@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
-import {sign} from "../api/user"
+import {sign} from "../../api/user"
 import {useNavigate} from "react-router";
+import Error from "./Error";
 
 const SignUp = () => {
 
@@ -9,10 +10,18 @@ const SignUp = () => {
    const [password, setPassword] = useState("");
    const [email, setEmail] = useState("");
 
+   const [error, setError] = useState("")
+
    const navigate = useNavigate()
    let item = {username, password, email}
    const submit = () => {
       sign(item, navigate, "register")
+         .then(() => {
+            setError("")
+         })
+         .catch((error) => {
+            setError(error)
+         })
    }
 
    return (
@@ -49,6 +58,13 @@ const SignUp = () => {
                          onChange={(e) => setPassword(e.target.value)}/>
                </div>
 
+               {
+                  error ?
+                     <div className="error my-2">
+                        <Error message={error}/>
+                     </div>
+                     : null
+               }
                <div className="text-end">
                   <button className="btn btn-primary" onClick={submit}>Register</button>
                </div>

@@ -1,25 +1,34 @@
+import {resolvePath} from "react-router";
+
 const url = 'http://localhost:8000/users';
 const headers = {
    'Content-Type': 'application/json',
    'Accept': 'application/json'
 };
+
 export async function sign(item, navigate, type) {
-   let result = await fetch(`http://localhost:8000/${type}`,
+
+   const response = await fetch(`http://localhost:8000/${type}`,
       {
          method: 'POST',
          headers: headers,
          body: JSON.stringify(item)
       })
-   result = await result.json()
-   localStorage.setItem("user", JSON.stringify(result.user))
-   localStorage.setItem("token", JSON.stringify(result.accessToken))
-   navigate("/")
+   const result = await response.json()
+   if (response.ok) {
+      localStorage.setItem("user", JSON.stringify(result.user))
+      localStorage.setItem("token", JSON.stringify(result.accessToken))
+      navigate("/")
+   } else {
+      const error = `Error ${response.status} : ${response.statusText} - ${result}`
+      console.log(error)
+      return Promise.reject(error)
+   }
 }
 
 export const getAllUsers = () => {
    return fetch(url, {headers})
       .then((response) => response.json())
-      .catch((error) => console.log(error))
 }
 
 export const getOneUser = (userId) => {
