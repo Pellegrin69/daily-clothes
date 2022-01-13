@@ -7,21 +7,22 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import {useEffect, useState} from "react";
 
-export const ModaleEditClothes: React.FC<ModaleEditClothesProps> = (props) => {
-  const getClothes = () => getAllClothes().then((data) => props.setClothes(data))
+export const ModaleEditClothes: React.FC<ModaleEditClothesProps> = ({setClothes, setOpenEditClothe, openEditClothe, currentEditClothe}) => {
+  const getClothes = () => getAllClothes().then((data) => setClothes(data))
   const handleClose = () => {
-    props.setOpenEditClothe(false)
+    setOpenEditClothe(false)
   };
 
-  const [brandFieldValue, setBrandValue] = React.useState("")
-  const [sizeFieldValue, setSizeValue] = React.useState("")
-  const [typeFieldValue, setTypeValue] = React.useState("")
-  const [colorFieldValue, setColorValue] = React.useState("")
+  const [brandFieldValue, setBrandValue] = useState("")
+  const [sizeFieldValue, setSizeValue] = useState("")
+  const [typeFieldValue, setTypeValue] = useState("")
+  const [colorFieldValue, setColorValue] = useState("")
 
-  const updateClothes = (clothe) => {
+  const updateClothes = () => {
     updateAClothe({
-      id: clothe.id,
+      id: currentEditClothe.id,
       brand: brandFieldValue,
       size: sizeFieldValue,
       type: typeFieldValue,
@@ -29,8 +30,8 @@ export const ModaleEditClothes: React.FC<ModaleEditClothesProps> = (props) => {
     })
       .then(() => {
         getClothes().then(r => r);
-      });
-    props.setOpenEditClothe(false);
+      })
+      .finally(() => setOpenEditClothe(false));
   }
 
   const handleBrandFieldChange = (e) => {
@@ -46,8 +47,17 @@ export const ModaleEditClothes: React.FC<ModaleEditClothesProps> = (props) => {
     setColorValue(e.target.value)
   }
 
+  useEffect(() => {
+    if (currentEditClothe) {
+      setBrandValue(currentEditClothe.brand);
+      setSizeValue(currentEditClothe.size);
+      setTypeValue(currentEditClothe.type);
+      setColorValue(currentEditClothe.color);
+    }
+  }, [currentEditClothe])
+
   return (
-    <Dialog open={props.openEditClothe} onClose={handleClose}>
+    <Dialog open={openEditClothe} onClose={handleClose}>
       <DialogTitle>Edit your close</DialogTitle>
       <DialogContent>
         <DialogContentText>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import {useContext, useEffect, useState} from "react";
-import {deleteAClothe, getAllClothes, updateAClothe} from "../api/clothes";
+import {deleteAClothe, getAllClothes} from "../api/clothes";
 import {ClothesContext} from "./ClothesContext";
 import {ModaleAddClothes} from "./ModaleAddClothes";
 import {ModaleEditClothes} from "./ModaleEditClothes";
@@ -11,11 +11,7 @@ export const AddClothes = () => {
   const {clothes, setClothes} = useContext(ClothesContext);
   const getClothes = () => getAllClothes().then((data) => setClothes(data))
 
-  const brandFieldValue = React.useState("")
-  const sizeFieldValue = React.useState("")
-  const typeFieldValue = React.useState("")
-  const colorFieldValue = React.useState("")
-
+  const [currentEditClothe, setCurrentEditClothe] = useState(null);
   const [openAddClothe, setOpenAddClothe] = React.useState(false);
   const [openEditClothe, setOpenEditClothe] = React.useState(false);
 
@@ -23,18 +19,10 @@ export const AddClothes = () => {
     setOpenAddClothe(true);
   };
 
-  const updateClickHandler = (clothe) => {
-    updateAClothe({
-      id: clothe.id,
-      brand: brandFieldValue,
-      size: sizeFieldValue,
-      type: typeFieldValue,
-      color: colorFieldValue,
-    })
-      .then(() => {
-        getClothes().then(r => r);
-      });
+  const handleEditClothe = (clothe) => {
     setOpenEditClothe(true);
+    setOpenEditClothe(clothe);
+    setCurrentEditClothe(clothe);
   }
 
   const deleteClickHandler = (clothe) => {
@@ -59,6 +47,7 @@ export const AddClothes = () => {
       />
 
       <ModaleEditClothes
+        currentEditClothe={currentEditClothe}
         openEditClothe={openEditClothe}
         setOpenEditClothe={setOpenEditClothe}
         setClothes={setClothes}
@@ -81,7 +70,7 @@ export const AddClothes = () => {
                     <p className="card-text">Color : {clothe.color}</p>
                     <div className="btn btn-group">
                       <button onClick={() => deleteClickHandler(clothe)} className="btn btn-danger">Delete</button>
-                      <button onClick={() => updateClickHandler(clothe)}  className="btn btn-primary">Edit</button>
+                      <button onClick={() => handleEditClothe(clothe)}  className="btn btn-primary">Edit</button>
                     </div>
                   </div>
                 </div>
