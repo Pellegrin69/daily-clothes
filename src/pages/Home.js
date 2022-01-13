@@ -8,8 +8,8 @@ const Home = () => {
    const [clothes, setClothes] = useState(["No clothe in the database"]);
    const getClothes = () => getAllClothes().then((data) => setClothes(data))
 
-   /*const [forecast, setForecast] = useState([])
-   const getWeatherData = () => getForecast().then((data) => setForecast(data))*/
+   const [forecast, setForecast] = useState([])
+   const getWeatherData = () => getForecast().then((data) => setForecast(data))
 
    const clickHandler = () => {
       addAClothe({
@@ -42,9 +42,9 @@ const Home = () => {
          });
    }
 
-   /*useEffect(() => {
+   useEffect(() => {
       getWeatherData()
-   }, []);*/
+   }, []);
 
    return <Forecast/>
 }

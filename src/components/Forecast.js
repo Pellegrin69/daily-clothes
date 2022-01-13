@@ -9,8 +9,8 @@ const Forecast = () => {
    })
 
    return <>
-      <p>yoo</p>
-      </>;
+      <p>{responseObj}</p>
+   </>;
 };
 
 export default Forecast;
