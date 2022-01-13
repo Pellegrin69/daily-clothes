@@ -10,11 +10,6 @@ export const getAllClothes = () => {
     .catch((error) => console.log(error))
 }
 
-export const getOneClothe = (clotheId) => {
-  return fetch(`${url}/${clotheId}`, {method: 'GET', headers})
-    .then((response) => response.json())
-}
-
 export const addAClothe = (newClothe) => {
   return fetch(url, {method: 'POST', headers, body: JSON.stringify(newClothe)})
 }
