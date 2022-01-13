@@ -30,6 +30,9 @@ const Navbar = () => {
                               <li className="nav-item">
                                  <Link className="nav-link" to={"/about"}>About</Link>
                               </li>
+                              <li className="nav-item">
+                                 <Link className="nav-link" to={"/wardrobe"}>Wardrobe</Link>
+                              </li>
                               <NavDropdown className="text-end" title={user && user.username}>
                                  <NavDropdown.Item>
                                     <Link className="text-decoration-none text-dark" to={`/profile/${user.id}`}>Profile</Link>
