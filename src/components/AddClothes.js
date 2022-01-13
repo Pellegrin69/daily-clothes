@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import {useContext, useEffect, useState} from "react";
 import {deleteAClothe, getAllClothes} from "../api/clothes";
 import {ClothesContext} from "./ClothesContext";
@@ -56,9 +55,9 @@ export const AddClothes = () => {
       <div className="container">
         <div className="row">
           <h4>Add, edit and look at your clothes</h4>
-          <Button variant="contained" onClick={handleClickOpen} className="mb-3 mt-3 col-12">
+          <button onClick={handleClickOpen} className="mb-3 mt-3 col-12 btn btn-primary">
             Add a clothe
-          </Button>
+          </button>
           {
             clothes.map((clothe, index) =>
               <div key={index} className="col-3 mb-3">

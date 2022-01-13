@@ -1,39 +1,47 @@
 import * as React from "react";
 import {Card} from "react-bootstrap";
 import Select from "react-select"
+import {useState} from "react";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import {GenerateOutfit} from "./GenerateOutfit";
 
 export const HomeGenerateOutfit = () => {
-  const generateOutfit = () => {
-    return (
-      console.log("pull balenciaga white + jogging Jordan midnight blue + Nike Air Force Off White")
-    )
+  const [generateOutfit, setGenerateOutfit] = useState(false)
+
+  const handleClose = () => {
+    setGenerateOutfit(false)
   }
 
   const calfSelectOptions = [
-    { value: 'Yes', label: 'Yes' },
-    { value: 'No', label: 'No' },
-    { value: 'More or less', label: 'More or less' }
+    {value: 'Yes', label: 'Yes'},
+    {value: 'No', label: 'No'},
+    {value: 'More or less', label: 'More or less'}
   ]
 
   const colorsSelectOptions = [
-    { value: 'Black', label: 'Black' },
-    { value: 'White', label: 'White' },
-    { value: 'Orange', label: 'Orange' },
-    { value: 'Yellow', label: 'Yellow' },
-    { value: 'Purple', label: 'Purple' },
-    { value: 'Green', label: 'Green' },
-    { value: 'Red', label: 'Red' },
-    { value: 'Blue', label: 'Blue' },
+    {value: 'Black', label: 'Black'},
+    {value: 'White', label: 'White'},
+    {value: 'Orange', label: 'Orange'},
+    {value: 'Yellow', label: 'Yellow'},
+    {value: 'Purple', label: 'Purple'},
+    {value: 'Green', label: 'Green'},
+    {value: 'Red', label: 'Red'},
+    {value: 'Blue', label: 'Blue'},
   ]
 
   const styleSelectOptions = [
-    { value: 'SportWear', label: 'SportWear' },
-    { value: 'Streetwear', label: 'Streetwear' },
-    { value: 'Casual', label: 'Casual' },
-    { value: 'Chic', label: 'Chic' },
-    { value: 'Denim', label: 'Denim' },
-    { value: 'Rock', label: 'Rock' },
-    { value: 'Hipster', label: 'Hipster' },
+    {value: 'SportWear', label: 'SportWear'},
+    {value: 'Streetwear', label: 'Streetwear'},
+    {value: 'Casual', label: 'Casual'},
+    {value: 'Chic', label: 'Chic'},
+    {value: 'Denim', label: 'Denim'},
+    {value: 'Rock', label: 'Rock'},
+    {value: 'Hipster', label: 'Hipster'},
   ]
 
   return (
@@ -59,8 +67,8 @@ export const HomeGenerateOutfit = () => {
               </p>
             </div>
             <div className="col">
-              <Card className="card" style={{ height: "18rem" }}>
-                <button onClick={generateOutfit} style={{ height: "100%" }} className="btn btn-primary">
+              <Card className="card" style={{height: "18rem"}}>
+                <button onClick={() => setGenerateOutfit(true)} style={{height: "100%"}} className="btn btn-primary">
                   <h2>
                     <svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" fill="currentColor"
                          className="bi bi-gear-wide-connected" viewBox="0 0 16 16">
@@ -77,6 +85,22 @@ export const HomeGenerateOutfit = () => {
         </div>
 
       </div>
+
+      <Dialog open={generateOutfit} onClose={handleClose} fullScreen>
+        <DialogTitle>Congratulation🎉, here is your outfit !</DialogTitle>
+        <DialogContent dividers>
+          <DialogContentText>
+            <h5>Prediction of the outfit</h5> <p>if you you wear this, your day will good and you will take number of beautiful girl !</p>
+          </DialogContentText>
+
+          <GenerateOutfit />
+
+
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} variant="contained" color="error">Close</Button>
+        </DialogActions>
+      </Dialog>
     </>
   )
 }
