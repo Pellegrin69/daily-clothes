@@ -1,5 +1,5 @@
 import { useEffect, useState} from "react";
-import {createAUsers, deleteAUsers, getAllUsers, updateAUsers} from "../api/user";
+import {createAUsers, deleteAUser, getAllUsers, updateAUser} from "../api/user";
 import {Link} from "react-router-dom";
 
 export const UserList = () => {
@@ -20,7 +20,7 @@ export const UserList = () => {
   }
 
   const updateClickHandler = (user) => {
-    updateAUsers({
+    updateAUser({
       id: user.id,
       firstname: "Toto",
       lastname: "Bourdon",
@@ -34,7 +34,7 @@ export const UserList = () => {
   }
 
   const deleteClickHandler = (user) => {
-    deleteAUsers(user.id)
+    deleteAUser(user.id)
       .then(() => {
         getUsers();
       });
