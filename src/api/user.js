@@ -3,20 +3,38 @@ const headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
 };
+export async function sign(item, navigate, type) {
+    let result = await fetch(`http://localhost:8000/${type}`,
+        {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(item)
+        })
+    result = await result.json()
+    localStorage.setItem("user", JSON.stringify(result.user))
+    localStorage.setItem("token", JSON.stringify(result.accessToken))
+    navigate("/")
+}
 
 export const getAllUsers = () => {
-
     return fetch(url, {headers})
         .then((response) => response.json())
         .catch((error) => console.log(error))
 }
 
 export const getOneUser = (userId) => {
-    return fetch(`${url}/${userId}`, {method: 'GET', headers})
+    return fetch(`${url}/${userId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        }
+    })
         .then((response) => response.json())
 }
 
-export const createAUsers = (newUser) => {
+export const createAUser = (newUser) => {
     return fetch(url, {method: 'POST', headers, body: JSON.stringify(newUser)})
 }
 
@@ -26,12 +44,6 @@ export const updateAUsers = (updatedUser) => {
 
 export const deleteAUsers = (deletedUserID) => {
     return fetch(`${url}/${deletedUserID}`, {method: 'DELETE', headers})
-}
-
-export const removeUserSession = (navigate) => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    navigate("/signin")
 }
 
 export const getUser = () => {
@@ -48,3 +60,9 @@ export const setUserSession = (user, token) => {
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", token);
 }
+
+export const removeUserSession = (navigate) => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+}
+
