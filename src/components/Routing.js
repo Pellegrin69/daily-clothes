@@ -1,8 +1,8 @@
-import React, { useContext, createContext, useState, useEffect } from 'react';
+import React from 'react';
 import {Routes, Route} from "react-router-dom";
 import Home from "../pages/Home";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import SignIn from "./Login/SignIn";
+import SignUp from "./Login/SignUp";
 import Profile from "../pages/Profile";
 import About from "../pages/About";
 import NotFound from "../pages/NotFound";
