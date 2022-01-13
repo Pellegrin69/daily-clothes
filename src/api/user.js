@@ -48,13 +48,16 @@ export const getOneUser = (userId) => {
       .then((response) => response.json())
 }
 
-export const updateAUsers = (updatedUser) => {
-   return fetch(`${url}/${updatedUser.id}`, {method: 'PUT', headers, body: JSON.stringify(updatedUser)})
+export const updateAUser = (updatedUser) => {
+  return fetch(`${url}/${updatedUser.id}`, {method: 'PUT', headers, body: JSON.stringify(updatedUser)})
 }
 
-export const deleteAUsers = (deletedUserID) => {
-   return fetch(`${url}/${deletedUserID}`, {method: 'DELETE', headers})
+export const deleteAUser = (deletedUserID) => {
+  return fetch(`${url}/${deletedUserID}`, {method: 'DELETE', headers})
 }
 
-
-
+export const removeUserSession = (navigate) => {
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
+  navigate("/signin")
+}
